@@ -16,6 +16,8 @@ import org.sqlite.core.DB;
 
 public class Test {
 	public static void main (String [] args) {
+	RegistrationForme f = new RegistrationForme(); 
+
 	User f1  = new User();
 	f1.setSexeFemme();
 	f1.setAge(21);
