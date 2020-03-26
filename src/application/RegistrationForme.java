@@ -2,7 +2,11 @@ package application;
 
 import javax.swing.*; 
 import java.awt.*; 
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date; 
   
 class RegistrationForme 
     extends JFrame 
@@ -18,7 +22,7 @@ class RegistrationForme
     private JRadioButton female; 
     private ButtonGroup gengp; 
     private JLabel dob; 
-    private JComboBox date; 
+    private JComboBox day; 
     private JComboBox month; 
     private JComboBox year; 
     private JLabel poid; 
@@ -31,8 +35,8 @@ class RegistrationForme
     private JLabel res; 
     private JTextArea resadd; 
   
-    private String dates[] 
-        = { "1", "2", "3", "4", "5", 
+    private String days[] 
+        = { "01", "02", "03", "04", "05", 
             "6", "7", "8", "9", "10", 
             "11", "12", "13", "14", "15", 
             "16", "17", "18", "19", "20", 
@@ -40,9 +44,14 @@ class RegistrationForme
             "26", "27", "28", "29", "30", 
             "31" }; 
     private String months[] 
-        = { "Jan", "feb", "Mar", "Apr", 
+        = { "01", "02", "03", "04", "05", 
+                "6", "7", "8", "9", "10", 
+                "11", "12"
+        		
+        	/*	"Jan", "Feb", "Mar", "Apr", 
             "May", "Jun", "July", "Aug", 
-            "Sup", "Oct", "Nov", "Dec" }; 
+            "Sup", "Oct", "Nov", "Dec" */
+            }; 
     private String years[] 
         = { "1995", "1996", "1997", "1998", 
             "1999", "2000", "2001", "2002", 
@@ -52,15 +61,15 @@ class RegistrationForme
             "2015", "2016", "2017", "2018", 
             "2019",  "2020", "2021"}; 
     private String poids[] 
-            = { "51", "52", "53", "54"}; 
+            = { "51", "52", "53", "54",
+            	"55", "56", "57", "58",
+            	"59", "60", "61", "62",
+            	"63", "64", "65", "66",}; 
     private String tailles[] 
-            = { "51", "52", "53", "54", 
-                "1999", "2000", "2001", "2002", 
-                "2003", "2004", "2005", "2006", 
-                "2007", "2008", "2009", "2010", 
-                "2011", "2012", "2013", "2014", 
-                "2015", "2016", "2017", "2018", 
-                "2019",  "2020", "2021"}; 
+            = { "160", "161", "162", "163", 
+                "164", "165", "166", "167", 
+                "168", "169", "170", "171", 
+               }; 
   
     // constructor, to initialize the components 
     // with default values. 
@@ -122,11 +131,11 @@ class RegistrationForme
         dob.setLocation(100, 200); 
         c.add(dob); 
   
-        date = new JComboBox(dates); 
-        date.setFont(new Font("Arial", Font.PLAIN, 15)); 
-        date.setSize(50, 20); 
-        date.setLocation(200, 200); 
-        c.add(date); 
+        day = new JComboBox(days); 
+        day.setFont(new Font("Arial", Font.PLAIN, 15)); 
+        day.setSize(50, 20); 
+        day.setLocation(200, 200); 
+        c.add(day); 
   
         month = new JComboBox(months); 
         month.setFont(new Font("Arial", Font.PLAIN, 15)); 
@@ -210,25 +219,45 @@ class RegistrationForme
     // by the user and act accordingly 
     public void actionPerformed(ActionEvent e) 
     { 
+    	int poid = Integer.parseInt((String)tpoid.getSelectedItem());
+        int taille = Integer.parseInt((String)ttaille.getSelectedItem());
+        String jour = (String) day.getSelectedItem();
+        String mois = (String) month.getSelectedItem();
+        String anee = (String) year.getSelectedItem();
+        String tire = "-";
+        String dateDeNaissance = anee + tire + mois+ tire + jour;
+        LocalDate date = LocalDate.parse(dateDeNaissance);
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(date, today);
+        int age = period.getYears();
         if (e.getSource() == sub) { 
                 String data1; 
+                String data3;
                 String data 
                     = "Bonjour,  "
                       + tnom.getText() + "\n";
-                if (male.isSelected()) 
+                String data2 
+                = "DOB : "
+                  + (String)day.getSelectedItem() 
+                  + "/" + (String)month.getSelectedItem() 
+                  + "/" + (String)year.getSelectedItem() 
+                  + "\n";
+                if (male.isSelected()) {
                     data1 = "Gender : Male"
                             + "\n"; 
-                else
+                    double result = 88.36 + 13.4 *poid + 4.8 * taille  -5.7*age;
+                    data3= Double.toString(result);
+                }
+                else {
                     data1 = "Gender : Female"
                             + "\n"; 
-                String data2 
-                    = "DOB : "
-                      + (String)date.getSelectedItem() 
-                      + "/" + (String)month.getSelectedItem() 
-                      + "/" + (String)year.getSelectedItem() 
-                      + "\n"; 
-   
-                tout.setText(data + data1 + data2); 
+                    double result = 447.6 + 9.2 *poid + 3.1 * taille -4.3*age;
+                    data3= Double.toString(result);
+                }
+                
+                
+               
+				tout.setText(data + data1 + data2 + data3); 
                 tout.setEditable(false); 
                 res.setText("Registration Successfully.."); 
             } 
@@ -239,7 +268,7 @@ class RegistrationForme
             tnom.setText(def); 
             res.setText(def); 
             tout.setText(def); 
-            date.setSelectedIndex(0); 
+            day.setSelectedIndex(0); 
             month.setSelectedIndex(0); 
             year.setSelectedIndex(0); 
             resadd.setText(def); 
