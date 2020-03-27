@@ -1,6 +1,9 @@
 package application;
 
-import javax.swing.*; 
+import javax.swing.*;
+
+//import application.User.Genre;
+
 import java.awt.*; 
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -12,7 +15,8 @@ class RegistrationForme
     extends JFrame 
     implements ActionListener { 
   
-    // Components of the Form 
+  
+	// Components of the Form 
     private Container c; 
     private JLabel title; 
     private JLabel nom; 
@@ -73,9 +77,12 @@ class RegistrationForme
   
     // constructor, to initialize the components 
     // with default values. 
-    public RegistrationForme() 
+ /*   private final User user;
+    public RegistrationForme(User user) 
     { 
-        setTitle("Registration Form"); 
+		this.user = user;*/
+    public RegistrationForme() {
+		setTitle("Registration Form"); 
         setBounds(300, 90, 900, 600); 
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
         setResizable(false); 
@@ -260,6 +267,26 @@ class RegistrationForme
 				tout.setText(data + data1 + data2 + data3); 
                 tout.setEditable(false); 
                 res.setText("Registration Successfully.."); 
+ /*               if (male.isSelected()) {
+            		User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
+                    		Integer.parseInt((String) ttaille.getSelectedItem()), 
+                    		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
+                    		male.isSelected()); 
+            		u.AfficherNorme();
+            		}
+            		else {
+            			User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
+            	        		Integer.parseInt((String) ttaille.getSelectedItem()), 
+            	        		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
+            	        		female.isSelected()); 
+            			
+            			}	*/
+                User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
+                		Integer.parseInt((String) ttaille.getSelectedItem()), 
+                		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
+                		male.isSelected()); 
+        		u.AfficherNorme();
+
             } 
        
   
@@ -272,6 +299,21 @@ class RegistrationForme
             month.setSelectedIndex(0); 
             year.setSelectedIndex(0); 
             resadd.setText(def); 
+           
         } 
     } 
+   /* public void actionPerformed1(ActionEvent arg0) {
+    	if (male.isSelected()) {
+		User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
+        		Integer.parseInt((String) ttaille.getSelectedItem()), 
+        		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
+        		homme); }
+		else {
+			User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
+	        		Integer.parseInt((String) ttaille.getSelectedItem()), 
+	        		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
+	        		femme); }	
+		}*/
+
+   
 } 

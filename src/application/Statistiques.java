@@ -19,6 +19,7 @@ public class Statistiques {
 		for (int i = 0; i<this.getRepasStat().size(); i++) {
 			this.getRepasStat().get(i).listing();
 			}
+		 
 		}
 
 }

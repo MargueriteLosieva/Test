@@ -7,6 +7,7 @@ public class Repas {
 	
 	private Date date;
 	private ArrayList<Produit> produitsConsommee = new ArrayList<Produit>();
+	private User user;
 	
 	public ArrayList<Produit> getProduitsConsommee() {
 		return this.produitsConsommee;
@@ -24,8 +25,18 @@ public class Repas {
 			System.out.println(this.getProduitsConsommee().get(i).toString());
 		}
 		System.out.println(this.caloriesConsomeesRepas());
-	}
-	
+		double fact = this.caloriesConsomeesRepas();
+		double norme = user.norme();
+		System.out.println(fact);
+		if (norme > fact) {
+			System.out.println("Good day.");
+		} else {
+		  System.out.println("Good evening.");
+		}
+	};
+		
+		
+
 	public Date getDate() {
 		return this.date;
 	}

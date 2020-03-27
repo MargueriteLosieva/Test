@@ -1,6 +1,7 @@
 package application;
 
 
+
 import java.util.Calendar;
 
 /*import org.exolab.castor.jdo.Database;
@@ -10,39 +11,39 @@ import org.exolab.castor.jdo.JDOManager;*/
 import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import org.sqlite.core.DB;
 
 
+
 public class Test {
 	public static void main (String [] args) {
+		
+//	User u  = new User("Rita", 55, 165,  LocalDate.of(2001,01,01), femme);
+	
 	RegistrationForme f = new RegistrationForme(); 
-
-	User f1  = new User();
-	f1.setSexeFemme();
-	f1.setAge(21);
-	f1.setNom("Rita");
-	f1.setPoids(55);
-	f1.setTaille(165);
-	f1.AfficherNorme();
+	
+	
+	
 	Connexion connexion = new Connexion("Database.db");
     connexion.connect();
-    ResultSet resultSet = connexion.query("SELECT * FROM Calories");
+/*    ResultSet resultSet = connexion.query("SELECT * FROM Calories");
     try {
         while (resultSet.next()) {
             System.out.println("Aliment : "+resultSet.getString("Aliment"));
         }
     } catch (SQLException e) {
         e.printStackTrace();
-    }
+    }*/
     
     
-    
+ 
    PetitDejeuner p1 = new PetitDejeuner();
    Produit prod1 = new Produit("10", "Fromage à tartiner", 252, 4.5, 25, 3);
    Produit prod2 = new Produit("11", "Tuiles", 503, 4.8, 26, 61);
    prod2.setPoidsConsomee(115);
-   System.out.println(prod2.caloriesConsomees());
+//   System.out.println(prod2.caloriesConsomees());
    Date today = new Date();
    Date currentDate = new Date();
 
@@ -63,9 +64,8 @@ public class Test {
    Dejeuner p2 = new Dejeuner();
    p2.setDate(currentDatePlusOne);
    p2.consommerProduits(prod1);
-   
-   p1.listing();
-   p2.listing();
+ //  p1.listing();
+  // p2.listing();
  
    
    Statistiques s = new Statistiques();
@@ -73,6 +73,5 @@ public class Test {
    s.ajouterRepas(p2);
    s.statistiques();
    connexion.close();
-   
 	}
 }

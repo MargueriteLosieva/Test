@@ -1,39 +1,44 @@
 package application;
 
 
+import java.time.LocalDate;
+import java.time.Period;
 
 public class User {
-	private int poids, taille, age; 
+	private int poids, taille; 
+	private LocalDate dateDeNaissance;
 	private String nom;
-	public enum Genre {
-		femme, homme
-	}
+	private boolean isHomme;
 	
-	private Genre sexe;
-	
-	public void setSexeFemme() {
-		this.sexe = Genre.femme;
+	public User(String nom, int poids, int taille, LocalDate dateDeNaissance, boolean isHomme) {
+		this.nom = nom;
+		this.poids = poids;
+		this.taille = taille;
+		this.dateDeNaissance = dateDeNaissance;
+		this.isHomme = isHomme;
 	}
-	public void setSexeHomme() {
-		this.sexe = Genre.homme;
+
+
+	public boolean getGenre() {
+		return this.isHomme;
 	}
-	
-	public Genre getSexe() {
-		return this.sexe;
+
+	public void setGenre(boolean isHomme) {
+		this.isHomme = isHomme;
 	}
 
 	public void setPoids(int poids) {
 		this.poids = poids;
 	}
-	public int getAge() {
-		return this.age;
+	public LocalDate getDateDeNaissance() {
+		return this.dateDeNaissance;
 	}
 	
 	public int getPoids() {
 		return this.poids;
 	} 
-	public void setAge(int age) {
-		this.age = age;
+	public void setDatedeNaissance(LocalDate dateDeNaissance) {
+		this.dateDeNaissance = dateDeNaissance;
 	};
 	public int getTaille() {
 		return this.taille;
@@ -48,15 +53,21 @@ public class User {
 		this.nom = nom;
 	};
 	
+	
+    public int userAge() {
+    	LocalDate today = LocalDate.now();
+        Period period = Period.between(dateDeNaissance, today);
+    	int age =  period.getYears();
+		return age;
+    }
+			
 	public double norme (){
 		double result = 0;
-		switch (sexe) {
-        case  femme:
-        	result = 447.6 + 9.2 *this.getPoids() + 3.1 * this.getTaille() -4.3*this.getAge();
-        	break;
-        case  homme:
-        	result = 88.36 + 13.4 *this.getPoids() + 4.8 * this.getTaille()  -5.7*this.getAge();
-        	break;
+		if (isHomme == false) {
+        	result = 447.6 + 9.2 *this.getPoids() + 3.1 * this.getTaille() -4.3*this.userAge();
+		}
+		else {
+        	result = 88.36 + 13.4 *this.getPoids() + 4.8 * this.getTaille()  -5.7*this.userAge();
         	}
 		return result;
     }
@@ -64,4 +75,14 @@ public class User {
 	public void AfficherNorme() {
 		System.out.println(this.norme());
 	}
+	
+	public String toString() {
+	    return "User{" +
+	            "name='" + this.getNom() + '\'' +
+	            ", poids=" + this.getPoids() +
+	            ", taille=" + this.getTaille() +
+	            ", age=" + this.userAge()+
+	            ", norme=" + this.norme()+
+	            '}';
+	    }
 }
