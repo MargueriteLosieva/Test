@@ -19,9 +19,9 @@ public class Repas {
 		this.getProduitsConsommee().add(prod);
 	}
 	
-	public void Comparison () {
+/*	public void Comparison () {
 		double fact = this.caloriesConsomeesRepas();
-		double norme = User.getInstance().norme();
+		double norme = User.getUser().norme();
 		System.out.println(fact);
 		System.out.println(norme);
 		if (norme > fact) {
@@ -30,7 +30,7 @@ public class Repas {
 		else {
 			System.out.println("Vous n'avez pas terminé votre norme calorique");
 			}
-	}
+	}*/
 	
 	public void listing () {
 		System.out.println(this.getDate());

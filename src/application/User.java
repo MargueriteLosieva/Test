@@ -7,8 +7,21 @@ import java.util.ArrayList;
 
 
 
-public final class User {
-	private static User instance;
+public class User {
+	private static User uniqueInstance;
+	private User () {};
+	public static User getUser() {
+		if (uniqueInstance == null) {
+		uniqueInstance = new User();
+		}
+		return uniqueInstance;
+	}
+/*	public static User getInstance() {
+	if (instance ==null) {
+		instance = new User();
+	}
+	return instance;
+}*/
 	private int poids;
 	private int taille; 
 	private LocalDate dateDeNaissance;
@@ -23,14 +36,7 @@ public final class User {
 		this.isHomme = isHomme;
 	}*/
 	
-	private User () {};
 	
-	public static User getInstance() {
-	if (instance ==null) {
-		instance = new User();
-	}
-	return instance;
-}
 	public boolean getGenre() {
 		return this.isHomme;
 	}

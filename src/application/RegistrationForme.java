@@ -267,21 +267,18 @@ public class RegistrationForme
                     double result = 447.6 + 9.2 *poid + 3.1 * taille -4.3*age;
                     data3= Double.toString(result);
                 }
-                
-                
-               
+                              
 				tout.setText(data + data1 + data2 + data3); 
                 tout.setEditable(false); 
                 res.setText("Registration Successfully.."); 
-                User.getInstance().hashCode(); 
-                User.getInstance().setNom(tnom.getText());
-                User.getInstance().setPoids(Integer.parseInt((String) tpoid.getSelectedItem()));
-                User.getInstance().setTaille(Integer.parseInt((String) ttaille.getSelectedItem()));
-                User.getInstance().setDatedeNaissance(LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()));
-                User.getInstance().setGenre(male.isSelected()); 
-                User.getInstance().AfficherNorme();
-  //      		System.out.println( User.getInstance().hashCode());
-        		System.out.println( User.getInstance().toString());
+                User.getUser().setNom(tnom.getText());
+                User.getUser().setPoids(Integer.parseInt((String) tpoid.getSelectedItem()));
+                User.getUser().setTaille(Integer.parseInt((String) ttaille.getSelectedItem()));
+                User.getUser().setDatedeNaissance(LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()));
+                User.getUser().setGenre(male.isSelected()); 
+                User.getUser().AfficherNorme();
+        		System.out.println( User.getUser().hashCode());
+        		System.out.println( User.getUser().toString());
 
             } 
        

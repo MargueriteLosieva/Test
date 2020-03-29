@@ -9,6 +9,7 @@ import org.exolab.castor.jdo.JDOManager;*/
 
 //import java.sql.Date;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ import application.RegistrationForme;
 
 
 public class MonAppliFonctionne {
-	public static void main (String [] args) {
+	public static void main (String [] args) throws InterruptedException {
 		
 //	User u  = new User("Rita", 55, 165,  LocalDate.of(2001,01,01), femme);
 	
@@ -38,7 +39,7 @@ public class MonAppliFonctionne {
         e.printStackTrace();
     }*/
     
-    
+	
  
    PetitDejeuner p1 = new PetitDejeuner();
    Produit prod1 = new Produit("10", "Fromage à tartiner", 252, 4.5, 25, 3);
@@ -66,7 +67,7 @@ public class MonAppliFonctionne {
    p2.setDate(currentDatePlusOne);
    p2.consommerProduits(prod1);
  //  p1.listing();
-  // p2.listing();
+ // p2.listing();
    
 
    Statistiques s = new Statistiques();
