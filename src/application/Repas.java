@@ -7,7 +7,7 @@ public class Repas {
 	
 	private Date date;
 	private ArrayList<Produit> produitsConsommee = new ArrayList<Produit>();
-	private User user;
+
 	
 	public ArrayList<Produit> getProduitsConsommee() {
 		return this.produitsConsommee;
@@ -18,6 +18,20 @@ public class Repas {
 	public void consommerProduits (Produit prod) {
 		this.getProduitsConsommee().add(prod);
 	}
+	
+	public void Comparison () {
+		double fact = this.caloriesConsomeesRepas();
+		double norme = User.getInstance().norme();
+		System.out.println(fact);
+		System.out.println(norme);
+		if (norme > fact) {
+			System.out.println("Vous avez dépassé votre norme calorique");
+			}
+		else {
+			System.out.println("Vous n'avez pas terminé votre norme calorique");
+			}
+	}
+	
 	public void listing () {
 		System.out.println(this.getDate());
 		System.out.println("Repas");
@@ -25,17 +39,10 @@ public class Repas {
 			System.out.println(this.getProduitsConsommee().get(i).toString());
 		}
 		System.out.println(this.caloriesConsomeesRepas());
-		double fact = this.caloriesConsomeesRepas();
-		double norme = user.norme();
-		System.out.println(fact);
-		if (norme > fact) {
-			System.out.println("Good day.");
-		} else {
-		  System.out.println("Good evening.");
-		}
+	//	System.out.println(this.Comparison());
 	};
 		
-		
+	
 
 	public Date getDate() {
 		return this.date;
@@ -43,6 +50,7 @@ public class Repas {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
 	
 	public double caloriesConsomeesRepas() {
 		double result = 0;

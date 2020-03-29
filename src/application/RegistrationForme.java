@@ -9,9 +9,12 @@ import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Date; 
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.stream.IntStream; 
   
-class RegistrationForme 
+public class RegistrationForme 
     extends JFrame 
     implements ActionListener { 
   
@@ -39,45 +42,46 @@ class RegistrationForme
     private JLabel res; 
     private JTextArea resadd; 
   
+/*    int[] intDays = IntStream.range(1, 30).toArray();
+	private String days [] = Arrays.stream(intDays)
+							.mapToObj(String::valueOf)
+							.toArray(String[]::new);*/
+    
     private String days[] 
-        = { "01", "02", "03", "04", "05", 
-            "6", "7", "8", "9", "10", 
-            "11", "12", "13", "14", "15", 
-            "16", "17", "18", "19", "20", 
-            "21", "22", "23", "24", "25", 
-            "26", "27", "28", "29", "30", 
-            "31" }; 
+            = { 
+            		"01", "02", "03", "04", "05", 
+                    "06", "07", "08", "09", "10", 
+                    "11", "12", "13", "14", "15",
+                    "16", "17", "18", "19", "20","21","21","22","23","24","25","26","27","28","29", "30", "31"};
+	
     private String months[] 
-        = { "01", "02", "03", "04", "05", 
-                "6", "7", "8", "9", "10", 
+        = { 
+        		"01", "02", "03", "04", "05", 
+                "06", "07", "08", "09", "10", 
                 "11", "12"
         		
         	/*	"Jan", "Feb", "Mar", "Apr", 
             "May", "Jun", "July", "Aug", 
-            "Sup", "Oct", "Nov", "Dec" */
+            "Sup", "Oct", "Nov", "Dec"*/
             }; 
-    private String years[] 
-        = { "1995", "1996", "1997", "1998", 
-            "1999", "2000", "2001", "2002", 
-            "2003", "2004", "2005", "2006", 
-            "2007", "2008", "2009", "2010", 
-            "2011", "2012", "2013", "2014", 
-            "2015", "2016", "2017", "2018", 
-            "2019",  "2020", "2021"}; 
-    private String poids[] 
-            = { "51", "52", "53", "54",
-            	"55", "56", "57", "58",
-            	"59", "60", "61", "62",
-            	"63", "64", "65", "66",}; 
-    private String tailles[] 
-            = { "160", "161", "162", "163", 
-                "164", "165", "166", "167", 
-                "168", "169", "170", "171", 
-               }; 
+    int[] intYears = IntStream.range(1900, 2020).toArray();
+	private String years [] = Arrays.stream(intYears)
+							.mapToObj(String::valueOf)
+							.toArray(String[]::new);
+
+    int[] intPoids = IntStream.range(0, 250).toArray();
+	private String poids [] = Arrays.stream(intPoids)
+							.mapToObj(String::valueOf)
+							.toArray(String[]::new);
+	
+	int[] intTailles = IntStream.range(0, 250).toArray();
+	private String tailles [] = Arrays.stream(intTailles)
+							.mapToObj(String::valueOf)
+							.toArray(String[]::new);
   
     // constructor, to initialize the components 
     // with default values. 
- /*   private final User user;
+  /*  private final User user;
     public RegistrationForme(User user) 
     { 
 		this.user = user;*/
@@ -235,6 +239,8 @@ class RegistrationForme
         String dateDeNaissance = anee + tire + mois+ tire + jour;
         LocalDate date = LocalDate.parse(dateDeNaissance);
         LocalDate today = LocalDate.now();
+  //      LocalDate date = LocalDate.parse(dateDeNaissance.format(DateTimeFormatter.ofPattern("dd-MMM-yy")));
+  //      LocalDate today = LocalDate.now();
         Period period = Period.between(date, today);
         int age = period.getYears();
         if (e.getSource() == sub) { 
@@ -267,25 +273,15 @@ class RegistrationForme
 				tout.setText(data + data1 + data2 + data3); 
                 tout.setEditable(false); 
                 res.setText("Registration Successfully.."); 
- /*               if (male.isSelected()) {
-            		User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
-                    		Integer.parseInt((String) ttaille.getSelectedItem()), 
-                    		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
-                    		male.isSelected()); 
-            		u.AfficherNorme();
-            		}
-            		else {
-            			User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
-            	        		Integer.parseInt((String) ttaille.getSelectedItem()), 
-            	        		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
-            	        		female.isSelected()); 
-            			
-            			}	*/
-                User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
-                		Integer.parseInt((String) ttaille.getSelectedItem()), 
-                		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
-                		male.isSelected()); 
-        		u.AfficherNorme();
+                User.getInstance().hashCode(); 
+                User.getInstance().setNom(tnom.getText());
+                User.getInstance().setPoids(Integer.parseInt((String) tpoid.getSelectedItem()));
+                User.getInstance().setTaille(Integer.parseInt((String) ttaille.getSelectedItem()));
+                User.getInstance().setDatedeNaissance(LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()));
+                User.getInstance().setGenre(male.isSelected()); 
+                User.getInstance().AfficherNorme();
+  //      		System.out.println( User.getInstance().hashCode());
+        		System.out.println( User.getInstance().toString());
 
             } 
        
@@ -302,18 +298,6 @@ class RegistrationForme
            
         } 
     } 
-   /* public void actionPerformed1(ActionEvent arg0) {
-    	if (male.isSelected()) {
-		User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
-        		Integer.parseInt((String) ttaille.getSelectedItem()), 
-        		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
-        		homme); }
-		else {
-			User u = new User(tnom.getText(),Integer.parseInt((String) tpoid.getSelectedItem()),
-	        		Integer.parseInt((String) ttaille.getSelectedItem()), 
-	        		LocalDate.parse((String) year.getSelectedItem()+"-"+(String) month.getSelectedItem()+"-"+(String) day.getSelectedItem()), 
-	        		femme); }	
-		}*/
 
    
 } 

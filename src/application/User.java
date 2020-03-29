@@ -3,22 +3,34 @@ package application;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
-public class User {
-	private int poids, taille; 
+
+
+public final class User {
+	private static User instance;
+	private int poids;
+	private int taille; 
 	private LocalDate dateDeNaissance;
 	private String nom;
 	private boolean isHomme;
 	
-	public User(String nom, int poids, int taille, LocalDate dateDeNaissance, boolean isHomme) {
+/*	public User(String nom, int poids, int taille, LocalDate dateDeNaissance, boolean isHomme) {
 		this.nom = nom;
 		this.poids = poids;
 		this.taille = taille;
 		this.dateDeNaissance = dateDeNaissance;
 		this.isHomme = isHomme;
+	}*/
+	
+	private User () {};
+	
+	public static User getInstance() {
+	if (instance ==null) {
+		instance = new User();
 	}
-
-
+	return instance;
+}
 	public boolean getGenre() {
 		return this.isHomme;
 	}
@@ -85,4 +97,5 @@ public class User {
 	            ", norme=" + this.norme()+
 	            '}';
 	    }
+	
 }
