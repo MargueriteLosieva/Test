@@ -1,10 +1,13 @@
 package application;
 
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
+
+import org.json.simple.JSONObject;
 
 
 public class User {
@@ -24,7 +27,7 @@ public class User {
 }*/
 	private int poids;
 	private int taille; 
-	private LocalDate dateDeNaissance;
+	private int age;
 	private String nom;
 	private boolean isHomme;
 	
@@ -35,8 +38,6 @@ public class User {
 		this.dateDeNaissance = dateDeNaissance;
 		this.isHomme = isHomme;
 	}*/
-	
-	
 	public boolean getGenre() {
 		return this.isHomme;
 	}
@@ -48,16 +49,19 @@ public class User {
 	public void setPoids(int poids) {
 		this.poids = poids;
 	}
-	public LocalDate getDateDeNaissance() {
-		return this.dateDeNaissance;
-	}
 	
 	public int getPoids() {
 		return this.poids;
 	} 
-	public void setDatedeNaissance(LocalDate dateDeNaissance) {
-		this.dateDeNaissance = dateDeNaissance;
-	};
+	
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	public int getAge() {
+		return this.age;
+	} 
+	
 	public int getTaille() {
 		return this.taille;
 	}
@@ -72,20 +76,15 @@ public class User {
 	};
 	
 	
-    public int userAge() {
-    	LocalDate today = LocalDate.now();
-        Period period = Period.between(dateDeNaissance, today);
-    	int age =  period.getYears();
-		return age;
-    }
+  
 			
 	public double norme (){
 		double result = 0;
 		if (isHomme == false) {
-        	result = 447.6 + 9.2 *this.getPoids() + 3.1 * this.getTaille() -4.3*this.userAge();
+        	result = 447.6 + 9.2 *this.getPoids() + 3.1 * this.getTaille() -4.3*this.getAge();
 		}
 		else {
-        	result = 88.36 + 13.4 *this.getPoids() + 4.8 * this.getTaille()  -5.7*this.userAge();
+        	result = 88.36 + 13.4 *this.getPoids() + 4.8 * this.getTaille()  -5.7*this.getAge();
         	}
 		return result;
     }
@@ -99,9 +98,24 @@ public class User {
 	            "name='" + this.getNom() + '\'' +
 	            ", poids=" + this.getPoids() +
 	            ", taille=" + this.getTaille() +
-	            ", age=" + this.userAge()+
+	            ", age=" + this.getAge()+
 	            ", norme=" + this.norme()+
 	            '}';
 	    }
-	
+	public void cerateJsonUser () throws IOException{
+		JSONObject jsonob = new JSONObject();
+		jsonob.put("nom", this.getNom());
+		jsonob.put("genre", this.getGenre());
+		jsonob.put("age", this.getAge());
+		jsonob.put("taille", this.getTaille());
+		jsonob.put("poids", this.getPoids());
+		jsonob.put("norme", this.norme());
+		
+		FileWriter file = new FileWriter("User.json");
+		file.write(jsonob.toString());
+		file.flush();
+		file.close();
+		System.out.println(jsonob);
+	}
 }
+
