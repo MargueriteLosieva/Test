@@ -14,6 +14,8 @@ public class Produit {
 		this.glucides = glucides;
 		this.lipides = lipides;
 	}
+	
+	
 
 	public String getId() {
 		return this.id;

@@ -228,6 +228,7 @@ public class FormeDeRegistration
                 if (male.isSelected()) {
                     data1 = "Gender : Male"
                             + "\n"; 
+     //               double result = User.getUser().norme();
                     double result = 88.36 + 13.4 *poid + 4.8 * taille  -5.7*age;
                     data3= "Votre apport calorique quotidien est "+Double.toString(result) + "kkal";
                 }

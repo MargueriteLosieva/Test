@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import bd.Select;
 import views.FormeDeRegistration;
@@ -12,7 +13,8 @@ import views.Menu;
 
 public class MonAppliFonctionne {
 
-	public static void main(String[] args) throws IOException, InterruptedException, SQLException {
+	public static void main(String[] args) throws IOException, InterruptedException, SQLException 
+	{
 /*		Connexion connexion = new Connexion("Database.db");
 	    connexion.connect();
 	    ResultSet resultSet = connexion.query("SELECT * FROM Calories");
@@ -38,7 +40,7 @@ public class MonAppliFonctionne {
 	    
 	    
 	
-	String fileName = "D:\\eclipse-workspace\\MarharytaLosieva\\User.json";
+	String fileName = "C:\\Users\\marga\\git\\MarharytaLosieva\\User.json";
 	if ((new File(fileName)).exists()) {
 		System.out.println("Déjà existant");
 //		User.getUser().AfficherNorme();
@@ -50,11 +52,12 @@ public class MonAppliFonctionne {
 	while ((new File(fileName)).exists() == false) {
 		TimeUnit.SECONDS.sleep(1);
 		}
-	System.out.println(prod.getString());
-	
+	System.out.println(prod.getResult());
+//	prod.getString();
 	Menu m = new Menu();
+	System.out.println(Arrays.toString(prod.getResult()));
+	String[] array = Arrays.toString(prod.getResult()).split(" ,");
+	prod.listingProduits();
 	
 	}
-	
-	
 }

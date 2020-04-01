@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Repas {
 	
-	private Date date;
+	private String date;
 	private ArrayList<Produit> produitsConsommee = new ArrayList<Produit>();
 
 	
@@ -44,10 +44,10 @@ public class Repas {
 		
 	
 
-	public Date getDate() {
+	public String getDate() {
 		return this.date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

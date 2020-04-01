@@ -1,11 +1,13 @@
 package bd;
 
 import java.sql.DriverManager;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
  
 
 public class Select {
@@ -56,7 +58,7 @@ public class Select {
             // loop through the result set
             while (rs.next()) {
             	list.add(rs.getString("aliment")); 
-                //System.out.println(rs.getString("aliment"));
+     //           System.out.println(rs.getString("aliment"));
             }
             
             setResult(list.toArray(getResult()));
@@ -71,15 +73,10 @@ public class Select {
         }
         
     }
-    
-    public String[] getString() {
-		return this.getResult();
-	}
-
-
+   
 
 	public String[] getResult() {
-		return result;
+		return this.result;
 	}
 
 
@@ -87,7 +84,49 @@ public class Select {
 	public void setResult(String[] result) {
 		this.result = result;
 	}
+	
+	public void listingProduits() {
+		 for(int i =0; i<getResult().length; i++){
+			 if(this.result[i] != null) {
+				 System.out.println(getResult()[i]);
+			 }
+		}
+	}
     
+	
+
+    
+/*    public void selectAllProd(){
+        String sql = "SELECT aliment FROM calories";
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+        	while (rs.next()) {
+        	    Array z = rs.getArray("ZIPS");
+        	    String[] zips = (String[])z.getArray();
+        	    for (int i = 0; i < zips.length; i++) {
+    //    	        if (!ZipCode.isValid(zips[i])) {
+        	            // ...
+        	            // Code to display warning
+        	        }
+        	    
+        	    }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public String[] getZip() {
+		return zips;
+	}
+    	*/
+    
+    
+
     
     
     
